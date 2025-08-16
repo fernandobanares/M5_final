@@ -1,0 +1,60 @@
+package runners;
+
+import org.junit.platform.suite.api.ConfigurationParameter;
+import org.junit.platform.suite.api.IncludeEngines;
+import org.junit.platform.suite.api.SelectClasspathResource;
+import org.junit.platform.suite.api.Suite;
+
+import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
+import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
+import static io.cucumber.junit.platform.engine.Constants.FEATURES_PROPERTY_NAME;
+import static io.cucumber.junit.platform.engine.Constants.FILTER_TAGS_PROPERTY_NAME;
+
+/**
+ * SecurityTestRunner - Runner específico para pruebas de seguridad
+ * 
+ * Este runner ejecuta únicamente las pruebas relacionadas con seguridad,
+ * incluyendo validaciones de autenticación, autorización y protección
+ * contra ataques comunes.
+ * 
+ * Para ejecutar: mvn test -Dtest=SecurityTestRunner
+ */
+@Suite
+@IncludeEngines("cucumber")
+@SelectClasspathResource("features")
+@ConfigurationParameter(key = FEATURES_PROPERTY_NAME, value = "src/test/resources/features")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "steps,hooks")
+@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = 
+    "pretty," +
+    "html:reports/security-reports," +
+    "json:reports/security-reports/Security.json," +
+    "junit:reports/security-reports/Security.xml")
+@ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@Security or @Load")
+public class SecurityTestRunner {
+    
+    /**
+     * Runner para ejecutar pruebas de seguridad
+     * 
+     * CARACTERÍSTICAS:
+     * - Ejecuta escenarios marcados con @Security o @Load
+     * - Genera reportes de seguridad en: reports/security-reports/
+     * - Incluye pruebas de fuerza bruta y bloqueo de cuentas
+     * - Valida manejo de caracteres especiales y inyecciones
+     * - Tiempo de ejecución: 10-15 minutos
+     * 
+     * ESCENARIOS INCLUIDOS:
+     * - Intentos de login con credenciales inválidas
+     * - Pruebas de fuerza bruta (múltiples intentos)
+     * - Validación de caracteres especiales
+     * - Bloqueo temporal y permanente de cuentas
+     * - Registro con datos maliciosos
+     * - Validación de contraseñas débiles
+     * 
+     * CASOS DE SEGURIDAD CUBIERTOS:
+     * - Protección contra fuerza bruta
+     * - Validación de entrada (input validation)
+     * - Manejo de sesiones
+     * - Logging de eventos de seguridad
+     * - Rate limiting
+     */
+}
