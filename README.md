@@ -192,12 +192,3 @@ Los hooks en `src/test/java/hooks/TestHooks.java` permiten:
 4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
 5. Crear un Pull Request
 
-## 📞 Soporte
-
-Para preguntas o problemas, crear un issue en el repositorio del proyecto.
-
----
-
-**Desarrollado por**: Equipo de QA  
-**Fecha**: 2025  
-**Versión**: 1.0.0
